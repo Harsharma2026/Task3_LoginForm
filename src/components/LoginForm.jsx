@@ -1,39 +1,43 @@
-// src/components/LoginForm.js
-import React, { useState } from 'react';
-import Logo from './logo.png';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Logo from "../logo.png";
+// import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Invalid email format');
+      setError("Invalid email format");
       return;
     }
 
     // Validate password
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?!.*[^A-Za-z0-9@]).{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{8,}$/;
     if (!passwordRegex.test(password)) {
-      setError('Invalid password format');
+      setError("Invalid password format");
       return;
     }
 
-    // Perform login logic here
-    // ...
-
-    // Clear error
-    setError('');
+    // Check if the entered password is correct
+    if (password === "SmartServTest@123") {
+      // Redirect to the dashboard page
+      navigate("/dashboard");
+    } else {
+      setError("Incorrect password");
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-[#222222]">
       <div className="bg-[#141414] p-8 rounded shadow-md w-[40%] h-[75%] text-white flex flex-col items-center">
         <img src={Logo} alt="Company Logo" className="mb-4" />
-        
+
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <input
           type="text"
@@ -56,7 +60,10 @@ const LoginForm = () => {
           Login
         </button>
         <div className="flex justify-between items-center w-[60%] mb-4">
-          <a href="#forgot-password" className="text-gray-400 hover:underline">
+          <a
+            href="mailto:support@smartserv.io?subject=Password%20Reset"
+            className="text-gray-400 hover:underline"
+          >
             Forgot your Password?
           </a>
         </div>

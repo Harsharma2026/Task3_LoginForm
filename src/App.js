@@ -1,13 +1,18 @@
 // src/App.js
-import React from 'react';
-import LoginForm from './LoginForm';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
 
-function App() {
+import Dashboard from "./components/Dashboard";
+
+const App = () => {
   return (
-    <div>
-      <LoginForm />
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginForm />} />
+
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
-}
+};
 
 export default App;
