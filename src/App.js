@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<LoginForm />} />
+      <Route path="/Task3_LoginForm" exact element={<LoginForm />} />
 
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
